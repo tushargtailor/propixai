@@ -115,7 +115,7 @@ const PricingSection = () => {
         "AI Retouch, Upscaler and more",
       ],
       featured: true,
-      planId: "cplan_2ywZwXjYQQipWYxjCmFZCgCgsTZ",
+      planId: "cplan_32BvYDlOODI6C8M6573BJsgVHF8",
       buttonText: "Upgrade to Pro",
     },
   ];

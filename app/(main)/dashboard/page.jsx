@@ -5,8 +5,8 @@ import { Plus, Image, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useConvexQuery } from "@/hooks/use-convex-query";
 import { api } from "@/convex/_generated/api";
-// import { NewProjectModal } from "./_components/new-project-modal";
-// import { ProjectGrid } from "./_components/project-grid";
+import { NewProjectModal } from "./_components/new-project-modal";
+import { ProjectGrid } from "./_components/project-grid";
 
 export default function DashboardPage() {
   const [showNewProjectModal, setShowNewProjectModal] = useState(false);
@@ -53,10 +53,10 @@ export default function DashboardPage() {
         )}
 
         {/* New Project Modal */}
-        {/* <NewProjectModal
+        <NewProjectModal
           isOpen={showNewProjectModal}
           onClose={() => setShowNewProjectModal(false)}
-        /> */}
+        />
       </div>
     </div>
   );
