@@ -1,3 +1,5 @@
+"use client";
+
 import React from "react";
 import {
   Crop,
@@ -8,7 +10,14 @@ import {
   Text,
   Eye,
 } from "lucide-react";
+import { AdjustControls } from "./_tools/adjust";
+import { BackgroundControls } from "./_tools/background-controls";
 import { useCanvas } from "@/context/context";
+import { TextControls } from "./_tools/text";
+import { AIExtenderControls } from "./_tools/ai-extend";
+import { ResizeControls } from "./_tools/resize";
+import { AIEdit } from "./_tools/ai-edit";
+import { CropContent } from "./_tools/crop";
 
 const TOOL_CONFIGS = {
   resize: {
@@ -48,10 +57,55 @@ const TOOL_CONFIGS = {
   },
 };
 
-export const EditorSidebar = ({ project }) => {
-
+export function EditorSidebar({ project }) {
   const { activeTool } = useCanvas();
-  
 
-  return <div>EditorSidebar</div>;
-};
+  const toolConfig = TOOL_CONFIGS[activeTool];
+
+  if (!toolConfig) {
+    return null;
+  }
+
+  const Icon = toolConfig.icon;
+
+  return (
+    <div className="min-w-96 border-r flex flex-col">
+      {/* Sidebar Header */}
+      <div className="p-4 border-b">
+        <div className="flex items-center gap-3">
+          <Icon className="h-5 w-5 text-white" />
+          <h2 className="text-lg font-semibold text-white">
+            {toolConfig.title}
+          </h2>
+        </div>
+        <p className="text-sm text-white mt-1">{toolConfig.description}</p>
+      </div>
+
+      {/* Sidebar Content */}
+      <div className="flex-1 p-4 overflow-y-scroll">
+        {renderToolContent(activeTool, project)}
+      </div>
+    </div>
+  );
+}
+
+function renderToolContent(activeTool, project) {
+  switch (activeTool) {
+    case "crop":
+      return <CropContent />;
+    case "resize":
+      return <ResizeControls project={project} />;
+    case "adjust":
+      return <AdjustControls />;
+    case "background":
+      return <BackgroundControls project={project} />;
+    case "ai_extender":
+      return <AIExtenderControls project={project} />;
+    case "text":
+      return <TextControls />;
+    case "ai_edit":
+      return <AIEdit project={project} />;
+    default:
+      return <div className="text-white">Select a tool to get started</div>;
+  }
+}
