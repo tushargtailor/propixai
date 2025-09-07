@@ -92,73 +92,73 @@ export const deleteProject = mutation({
   },
 });
 
-// export const getProject = query({
-//   args: { projectId: v.id("projects") },
-//   handler: async (ctx, args) => {
-//     const user = await ctx.runQuery(internal.users.getCurrentUser);
+export const getProject = query({
+  args: { projectId: v.id("projects") },
+  handler: async (ctx, args) => {
+    const user = await ctx.runQuery(internal.users.getCurrentUser);
 
-//     const project = await ctx.db.get(args.projectId);
-//     if (!project) {
-//       throw new Error("Project not found");
-//     }
+    const project = await ctx.db.get(args.projectId);
+    if (!project) {
+      throw new Error("Project not found");
+    }
 
-//     if (!user || project.userId !== user._id) {
-//       throw new Error("Access denied");
-//     }
+    if (!user || project.userId !== user._id) {
+      throw new Error("Access denied");
+    }
 
-//     return project;
-//   },
-// });
+    return project;
+  },
+});
 
-// export const updateProject = mutation({
-//   args: {
-//     projectId: v.id("projects"),
-//     canvasState: v.optional(v.any()),
-//     width: v.optional(v.number()), // ← Add this
-//     height: v.optional(v.number()), // ← Add this
-//     currentImageUrl: v.optional(v.string()),
-//     thumbnailUrl: v.optional(v.string()),
-//     activeTransformations: v.optional(v.string()),
-//     backgroundRemoved: v.optional(v.boolean()),
-//   },
-//   handler: async (ctx, args) => {
-//     const user = await ctx.runQuery(internal.users.getCurrentUser);
+export const updateProject = mutation({
+  args: {
+    projectId: v.id("projects"),
+    canvasState: v.optional(v.any()),
+    width: v.optional(v.number()), // ← Add this
+    height: v.optional(v.number()), // ← Add this
+    currentImageUrl: v.optional(v.string()),
+    thumbnailUrl: v.optional(v.string()),
+    activeTransformations: v.optional(v.string()),
+    backgroundRemoved: v.optional(v.boolean()),
+  },
+  handler: async (ctx, args) => {
+    const user = await ctx.runQuery(internal.users.getCurrentUser);
 
-//     const project = await ctx.db.get(args.projectId);
-//     if (!project) {
-//       throw new Error("Project not found");
-//     }
+    const project = await ctx.db.get(args.projectId);
+    if (!project) {
+      throw new Error("Project not found");
+    }
 
-//     if (!user || project.userId !== user._id) {
-//       throw new Error("Access denied");
-//     }
+    if (!user || project.userId !== user._id) {
+      throw new Error("Access denied");
+    }
 
-//     // Update the project
-//     const updateData = {
-//       updatedAt: Date.now(),
-//     };
+    // Update the project
+    const updateData = {
+      updatedAt: Date.now(),
+    };
 
-//     // Only update provided fields
-//     if (args.canvasState !== undefined)
-//       updateData.canvasState = args.canvasState;
-//     if (args.width !== undefined) updateData.width = args.width;
-//     if (args.height !== undefined) updateData.height = args.height;
-//     if (args.currentImageUrl !== undefined)
-//       updateData.currentImageUrl = args.currentImageUrl;
-//     if (args.thumbnailUrl !== undefined)
-//       updateData.thumbnailUrl = args.thumbnailUrl;
-//     if (args.activeTransformations !== undefined)
-//       updateData.activeTransformations = args.activeTransformations;
-//     if (args.backgroundRemoved !== undefined)
-//       updateData.backgroundRemoved = args.backgroundRemoved;
+    // Only update provided fields
+    if (args.canvasState !== undefined)
+      updateData.canvasState = args.canvasState;
+    if (args.width !== undefined) updateData.width = args.width;
+    if (args.height !== undefined) updateData.height = args.height;
+    if (args.currentImageUrl !== undefined)
+      updateData.currentImageUrl = args.currentImageUrl;
+    if (args.thumbnailUrl !== undefined)
+      updateData.thumbnailUrl = args.thumbnailUrl;
+    if (args.activeTransformations !== undefined)
+      updateData.activeTransformations = args.activeTransformations;
+    if (args.backgroundRemoved !== undefined)
+      updateData.backgroundRemoved = args.backgroundRemoved;
 
-//     await ctx.db.patch(args.projectId, updateData);
+    await ctx.db.patch(args.projectId, updateData);
 
-//     // Update user's last active time
-//     await ctx.db.patch(user._id, {
-//       lastActiveAt: Date.now(),
-//     });
+    // Update user's last active time
+    await ctx.db.patch(user._id, {
+      lastActiveAt: Date.now(),
+    });
 
-//     return args.projectId;
-//   },
-// });
+    return args.projectId;
+  },
+});
