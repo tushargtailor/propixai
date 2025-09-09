@@ -25,7 +25,7 @@ const Header = () => {
           <Image
             src="/propix-logo.png"
             alt="Propix AI Logo"
-            className="min-w-24 object-cover"
+            className="min-w-34 object-cover"
             width={96}
             height={24}
           />
