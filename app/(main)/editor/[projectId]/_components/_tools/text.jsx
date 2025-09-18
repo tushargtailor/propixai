@@ -15,8 +15,16 @@ import {
   AlignRight,
   AlignJustify,
 } from "lucide-react";
+
 import { useCanvas } from "@/context/context";
 import { IText } from "fabric";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 const FONT_FAMILIES = [
   "Arial",
@@ -28,6 +36,38 @@ const FONT_FAMILIES = [
   "Verdana",
   "Comic Sans MS",
   "Impact",
+  "Trebuchet MS",
+  "Palatino Linotype",
+  "Tahoma",
+  "Lucida Console",
+  "Lucida Sans Unicode",
+  "Gill Sans",
+  "Century Gothic",
+  "Candara",
+  "Franklin Gothic Medium",
+  "Book Antiqua",
+  "Garamond",
+  "Cambria",
+  "Constantia",
+  "Corbel",
+  "Optima",
+  "Segoe UI",
+  "Rockwell",
+  "Baskerville",
+  "Didot",
+  "Bodoni MT",
+  "Futura",
+  "Brush Script MT",
+  "Monaco",
+  "Andale Mono",
+  "Copperplate",
+  "Papyrus",
+  "MS Sans Serif",
+  "MS Serif",
+  "Lucida Bright",
+  "Lucida Handwriting",
+  "Geneva",
+  "Perpetua",
 ];
 
 const FONT_SIZES = { min: 8, max: 120, default: 20 };
@@ -209,17 +249,21 @@ export function TextControls() {
           {/* Font Family */}
           <div className="space-y-2 mb-4">
             <label className="text-xs text-white/70">Font Family</label>
-            <select
+            <Select
               value={fontFamily}
-              onChange={(e) => applyFontFamily(e.target.value)}
-              className="w-full px-3 py-2 bg-slate-700 border border-white/20 rounded text-white text-sm"
+              onValueChange={(val) => applyFontFamily(val)}
             >
-              {FONT_FAMILIES.map((font) => (
-                <option key={font} value={font}>
-                  {font}
-                </option>
-              ))}
-            </select>
+              <SelectTrigger className="w-full px-3 py-2 bg-slate-700 rounded  border border-white/20 text-white text-sm">
+                <SelectValue placeholder="Select font" />
+              </SelectTrigger>
+              <SelectContent className="max-h-52 bg-slate-700 text-white overflow-y-auto">
+                {FONT_FAMILIES.map((font) => (
+                  <SelectItem key={font} value={font}>
+                    {font}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
           </div>
 
           {/* Font Size Slider */}
